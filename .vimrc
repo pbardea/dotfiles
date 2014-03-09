@@ -106,17 +106,19 @@ let g:solarized_visibility="high"
 
 colorscheme molokai2
 " colorscheme solarized
+" colorscheme jellybeans
 runtime macros/matchit.vim
 
 :map <Leader>diff :VCSVimDiff<cr>
 
 " Comments
 " Perl, Python, Ruby, shell scripts
-autocmd BufNewFile,BufRead *.rb,*.py,*.pl,*.sh vmap u :-1/^#/s///<CR>
-autocmd BufNewFile,BufRead *.rb,*.py,*.pl,*.sh vmap c :-1/^/s//#/<CR>
+" autocmd BufNewFile,BufRead *.rb,*.py,*.pl,*.sh vmap u :-1/^#/s///<CR>
+" autocmd BufNewFile,BufRead *.rb,*.py,*.pl,*.sh vmap c :-1/^/s//#/<CR>
 " C, C++
-autocmd BufNewFile,BufRead *.h,*.c,*.cpp vmap u :-1/^\/\//s///<CR>
-autocmd BufNewFile,BufRead *.h,*.c,*.cpp vmap s :-1/^/s//\/\//<CR>
+" autocmd BufNewFile,BufRead *.h,*.c,*.cpp vmap u :-1/^\/\//s///<CR>
+" autocmd BufNewFile,BufRead *.h,*.c,*.cpp vmap s :-1/^/s//\/\//<CR>
+au FileType c,cpp,h setlocal comments-=:// comments+=f://
 
 nmap <F3> :cp<enter>
 nmap <F4> :cn<enter>
@@ -164,3 +166,11 @@ set clipboard=unnamed
 nmap <leader>delnum :%s/\v^[0-9]+\s+//gc<cr>
 nmap <leader>cl :noh<cr>
 nmap <leader>run :w<CR>:exe ":!python " . getreg("%") . "" <CR>
+nmap <C-i> :tabp<cr>
+nmap <C-o> :tabn<cr>
+nmap :t :tabe
+
+nmap <leader>be :BufExplorer<cr>
+
+" Show whitespace
+set list listchars=tab:\ \ ,trail:·

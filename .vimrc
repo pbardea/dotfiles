@@ -1,4 +1,5 @@
 set ignorecase
+set ruler
 set smartcase
 set number
 set shellslash
@@ -174,3 +175,36 @@ nmap <leader>be :BufExplorer<cr>
 
 " Show whitespace
 set list listchars=tab:\ \ ,trail:·
+
+hi Normal guibg=#32322f ctermbg=236
+hi NonText guibg=#32322f ctermbg=236
+hi ColorColumn guibg=#000000 ctermbg=0
+let &colorcolumn=join(range(1,80),",")
+
+set tw=79
+set formatoptions+=t
+
+
+set statusline=%f    " Path.
+set statusline+=%m   " Modified flag.
+set statusline+=%r   " Readonly flag.
+set statusline+=%w   " Preview window flag.
+
+set statusline+=\    " Space.
+
+set statusline+=%#redbar#                " Highlight the following as a warning.
+set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
+set statusline+=%*                           " Reset highlighting.
+
+set statusline+=%=   " Right align.
+
+" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+set statusline+=(
+set statusline+=%{&ft}                        " Type (python).
+set statusline+=)
+
+" Line and column position and counts.
+set statusline+=\ (L%l\/%L,\ C%03c)
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+
+set laststatus=2

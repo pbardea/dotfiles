@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/paul.bardea/.vim'
+let g:netrw_dirhist_2='/Users/paul.bardea/blog/app/models'
+let g:netrw_dirhist_3='/Users/paul.bardea/vim'
+let g:netrw_dirhist_4='/Users/paul.bardea/gittutorial'
+let g:netrw_dirhist_5='/Users/paul.bardea/.vim'

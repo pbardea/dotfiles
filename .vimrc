@@ -5,7 +5,6 @@ set number
 set shellslash
 set nocompatible
 set hidden
-set nowrap
 set history=1000
 set guioptions-=T
 set guioptions-=m
@@ -16,6 +15,9 @@ set incsearch
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp    
 set noerrorbells
+" set wrap linebreak nolist
+" set columns=86
+
 
 set expandtab
 set tabstop=2
@@ -27,6 +29,12 @@ set smarttab
 set backspace=indent,eol,start
 set wildmenu
 set t_Co=256
+
+noremap j gj
+noremap k gk
+
+noremap gj j
+noremap gk k
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -173,16 +181,9 @@ nmap :t :tabe
 
 nmap <leader>be :BufExplorer<cr>
 
-" Show whitespace
-set list listchars=tab:\ \ ,trail:·
+" Show whitespace(/invisibles)
+" set list listchars=tab:\ \ ,trail:·
 
-hi Normal guibg=#32322f ctermbg=236
-hi NonText guibg=#32322f ctermbg=236
-hi ColorColumn guibg=#000000 ctermbg=0
-let &colorcolumn=join(range(1,80),",")
-
-set tw=79
-set formatoptions+=t
 
 
 set statusline=%f    " Path.

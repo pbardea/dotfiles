@@ -22,7 +22,7 @@ set noerrorbells
 set expandtab
 set tabstop=2
 set softtabstop=2
-set shiftwidth=2 
+set shiftwidth=2
 set autoindent
 set smartindent
 set smarttab
@@ -43,23 +43,28 @@ call pathogen#helptags()
 nmap <leader>q :bd<cr>
 nmap <leader>w <c-w><c-w>
 nmap <silent> <leader>df gf<leader>diff<cr>
+:command -bang Q q<bang>
+:command -bang Wq wq<bang>
+:command -bang WQ wq<bang>
+:command -bang W w<bang>
 "set nobackup
 "set noswapfile
 nmap <C-j> :bn<cr>
 nmap <C-k> :bp<cr>
 
 nnoremap <leader><space> :noh<cr>
+nnoremap <leader>cl :noh<cr>
 nnoremap / /\v
 vnoremap / /\v
 nnoremap <tab> %
 vnoremap <tab> %
 
 nmap <leader>wh VimwikiAll2HTML<cr>
-inoremap jj <esc>
+inoremap jk <esc>
 
 "For surround
 "nmap s      <Nop>
-"nmap sw     viwS
+"jnmap sw     viwS
 "nmap sW     viWS
 "nmap ss     visS
 "nmap sp     vipS
@@ -113,8 +118,8 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 "colorscheme solarized
 
+" colorscheme hybrid
 colorscheme molokai2
-" colorscheme solarized
 " colorscheme jellybeans
 runtime macros/matchit.vim
 
@@ -173,11 +178,10 @@ nmap <leader>todo :e ~/vimwiki/TODO.wiki<cr>
 set clipboard=unnamed
 
 nmap <leader>delnum :%s/\v^[0-9]+\s+//gc<cr>
-nmap <leader>cl :noh<cr>
 nmap <leader>run :w<CR>:exe ":!python " . getreg("%") . "" <CR>
-nmap <C-i> :tabp<cr>
-nmap <C-o> :tabn<cr>
-nmap :t :tabe
+" nmap <C-i> :tabp<cr>
+" nmap <C-o> :tabn<cr>
+nmap :tb :tabe
 
 nmap <leader>be :BufExplorer<cr>
 
@@ -209,3 +213,7 @@ set statusline+=\ (L%l\/%L,\ C%03c)
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 
 set laststatus=2
+let g:spotify_country_code = 'CA'
+nnoremap <leader>s :set spell!<Cr>
+nnoremap <leader>f 1z=
+vnoremap . :norm.<CR>

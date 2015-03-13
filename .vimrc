@@ -39,6 +39,7 @@ noremap gk k
 call pathogen#infect()
 call pathogen#helptags()
 
+
 "let mapleader = ","
 nmap <leader>q :bd<cr>
 nmap <leader>w <c-w><c-w>
@@ -119,8 +120,9 @@ let g:solarized_visibility="high"
 "colorscheme solarized
 
 " colorscheme hybrid
-colorscheme molokai2
+" colorscheme molokai2
 " colorscheme jellybeans
+colorscheme badwolf
 runtime macros/matchit.vim
 
 :map <Leader>diff :VCSVimDiff<cr>
@@ -188,7 +190,14 @@ nmap <leader>be :BufExplorer<cr>
 " Show whitespace(/invisibles)
 " set list listchars=tab:\ \ ,trail:·
 
+" Show PASTE if in paste mode
+let g:airline_detect_paste=1
 
+" ----- airblade/vim-gitgutter settings -----
+" Required after having changed the colorscheme
+hi clear SignColumn
+" In vim-airline, only display "hunks" if the diff is non-zero
+let g:airline#extensions#hunks#non_zero_only = 1
 
 set statusline=%f    " Path.
 set statusline+=%m   " Modified flag.
@@ -200,6 +209,18 @@ set statusline+=\    " Space.
 set statusline+=%#redbar#                " Highlight the following as a warning.
 set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
 set statusline+=%*                           " Reset highlighting.
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+augroup mySyntastic
+  au!
+  au FileType tex let b:syntastic_mode = "passive"
+augroup END
 
 set statusline+=%=   " Right align.
 
@@ -216,4 +237,30 @@ set laststatus=2
 let g:spotify_country_code = 'CA'
 nnoremap <leader>s :set spell!<Cr>
 nnoremap <leader>f 1z=
-vnoremap . :norm.<CR>
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+nnoremap <leader>tp :RainbowParenthesesToggle<Cr>
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces

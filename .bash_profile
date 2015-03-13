@@ -1,5 +1,5 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM function
-export PATH="/Users/your_user/scala/bin:$PATH"
+export PATH="/Users/pbardea/scala/bin:$PATH"
 export EDITOR=$(which vi)
 
 set -o vi
@@ -37,8 +37,12 @@ export PYTHONPATH=$DISLIN/python
 alias webstart='python -m SimpleHTTPServer'
 alias ll='ls -l'
 alias la='ls -A'
+alias rmdir='rm -r'
+alias cpdir='cp -r'
 
 alias conLab='ssh pabardea@linux.student.cs.uwaterloo.ca'
+alias vim='mvim'
+alias vi="/Applications/MacVim.app/Contents/MacOS/Vim" #use the macvim shell
 
 alias search=grep
 alias rake='bundle exec rake'
@@ -95,7 +99,11 @@ alias downloads='cd ~/Downloads'
 alias code='cd ~/code'
 alias gotoCS="cd ~/Google\ Drive/1B/CS138"
 
-alias edit='vim'
+msg() {
+  cd ~/Applications/imessageclient/;
+  node app
+}
+
 
 export CLICOLOR=1
 export LSCOLORS=FxGxBxDxCxEgEdxbxgxcxd
@@ -105,6 +113,10 @@ alias ls="ls -Fh"
 alias jserve="jekyll serve"
 alias jwatch="jekyll serve --watch"
 alias jbuild="jekyll build"
+
+#fun stuff
+alias hack='cmatrix'
+alias oldSchool='open ~/Applications/cool-retro-term/cool-retro-term.app'
 
 ##
 # Your previous /Users/pbardea/.bash_profile file was backed up as /Users/pbardea/.bash_profile.macports-saved_2015-01-07_at_08:04:00

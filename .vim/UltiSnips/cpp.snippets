@@ -1,0 +1,9 @@
+#$1 is first tab-stop (can mirror throughout snippet)
+#default text can be inserted with {1:PLACEHOLDER}
+#for documentation use ":help ultisnips"
+
+#the b ensures that it is only expanded at the beginning of the line
+#`!v just means to run vimscript stuff (and the strftime displays the time in vimscript)
+snippet todo "Todo" b
+//TODO: (`echo $USER`) ${1:check} ~ `!v strftime("%c")` 
+endsnippet

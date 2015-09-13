@@ -1,3 +1,15 @@
+"Vundle stuff
+" Of course
+set nocompatible
+
+" Required Vundle setup
+filetype off
+set runtimepath+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Plugin 'gmarik/vundle'
+
+
 set ignorecase
 set ruler
 set smartcase
@@ -48,10 +60,11 @@ nmap <silent> <leader>df gf<leader>diff<cr>
 :command -bang Wq wq<bang>
 :command -bang WQ wq<bang>
 :command -bang W w<bang>
-"set nobackup
-"set noswapfile
-nmap <C-j> :bn<cr>
-nmap <C-k> :bp<cr>
+
+" "set nobackup
+" nmap <C-j> :bn<cr>
+" "set noswapfile
+" nmap <C-k> :bp<cr>
 
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>cl :noh<cr>
@@ -122,7 +135,8 @@ let g:solarized_visibility="high"
 " colorscheme hybrid
 " colorscheme molokai2
 " colorscheme jellybeans
-colorscheme badwolf
+" colorscheme badwolf
+colorscheme gruvbox
 runtime macros/matchit.vim
 
 :map <Leader>diff :VCSVimDiff<cr>
@@ -207,20 +221,20 @@ set statusline+=%w   " Preview window flag.
 set statusline+=\    " Space.
 
 set statusline+=%#redbar#                " Highlight the following as a warning.
-set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
-set statusline+=%*                           " Reset highlighting.
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
-augroup mySyntastic
-  au!
-  au FileType tex let b:syntastic_mode = "passive"
-augroup END
+" set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
+" set statusline+=%*                           " Reset highlighting.
+" 
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" 
+" let g:syntastic_error_symbol = '✘'
+" let g:syntastic_warning_symbol = "▲"
+" augroup mySyntastic
+"   au!
+"   au FileType tex let b:syntastic_mode = "passive"
+" augroup END
 
 set statusline+=%=   " Right align.
 
@@ -234,29 +248,33 @@ set statusline+=\ (L%l\/%L,\ C%03c)
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 
 set laststatus=2
-let g:spotify_country_code = 'CA'
 nnoremap <leader>s :set spell!<Cr>
 nnoremap <leader>f 1z=
 
 let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
+        \ ['blue',       '#FF6000'],
+        \ ['cyan', '#00FFFF'],
+        \ ['darkmagenta',    '#CC00FF'],
+        \ ['yellow',   '#FFFF00'],
+        \ ['red',     '#FF0000'],
+        \ ['darkgreen',    '#00FF00'],
+        \ ['White',         '#c0c0c0'],
+        \ ['blue',       '#FF6000'],
+        \ ['cyan', '#00FFFF'],
+        \ ['darkmagenta',    '#CC00FF'],
+        \ ['yellow',   '#FFFF00'],
+        \ ['red',     '#FF0000'],
+        \ ['darkgreen',    '#00FF00'],
+        \ ['White',         '#c0c0c0'],
+        \ ['blue',       '#FF6000'],
+        \ ['cyan', '#00FFFF'],
+        \ ['darkmagenta',    '#CC00FF'],
+        \ ['yellow',   '#FFFF00'],
+        \ ['red',     '#FF0000'],
+        \ ['darkgreen',    '#00FF00'],
+        \ ['White',         '#c0c0c0'],
+        \ ]
+let g:rbpt_max = 21
 let g:rbpt_loadcmd_toggle = 0
 
 nnoremap <leader>tp :RainbowParenthesesToggle<Cr>
@@ -264,3 +282,18 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+"SNIPS
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" 
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"

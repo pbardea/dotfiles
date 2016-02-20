@@ -1,9 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/pbardea/site/img'
-let g:netrw_dirhist_2='/Users/pbardea/site/_posts'
-let g:netrw_dirhist_3='/Users/pbardea/site/_includes'
-let g:netrw_dirhist_4='/Users/pbardea/bower_components/typed.js'
-let g:netrw_dirhist_5='/Users/pbardea/flow-android/build'
-let g:netrw_dirhist_6='/Users/pbardea/.virtualenv'
-let g:netrw_dirhist_7='/Users/pbardea/.bash_sessions'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/pbardea/RoR/MessengerApp/db/migrate'
+let g:netrw_dirhist_2='/Users/pbardea/RoR/MessengerApp/app/views/messages'
+let g:netrw_dirhist_3='/Users/pbardea/enflick/textnow-ios5/application/TextNow/Bamboo'

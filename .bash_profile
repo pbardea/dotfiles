@@ -6,28 +6,66 @@
 
 #Set default editor to vim (the instance found in MacVim)
 export EDITOR=$(which mvim)
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 #Set command line editor to be vi
 set -o vi
 
 ########## COLOURS ################
-green="\[\033[0;32m\]"
-red="\[\033[0;31m\]"
-blue="\[\033[0;34m\]"
-purple="\[\033[0;35m\]"
-yellow="\[\033[0;33m\]"
-reset="\[\033[0m\]"
+green="\033[0;32m"
+red="\033[0;31m"
+blue="\033[0;34m"
+purple="\033[0;35m"
+yellow="\033[0;33m"
+reset="\033[0m"
+
+
+# jokes
+function joke {
+  json=`curl -s 'http://www.davepagurek.com/badjokes/joke/'`
+  q=`echo $json | jsawk 'return this.q' | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'`
+  a=`echo $json | jsawk 'return this.a' | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'`
+
+  if [ "$q" != "" ];then
+    echo -e "Q:$blue $q$reset\nA:$purple $a$reset"
+  fi
+}
+
 
 ########## PROMPT ################
 # '\u' adds the name of the current user to the prompt
 # '\$(__git_ps1)' adds git-related stuff
 # '\W' adds the name of the current directory
-export PS1="$red\w$green\$(__git_ps1)$reset $ "
+#
+# export PS1="$red\w$green\$(__git_ps1)$reset % "
+#
+_dir_chomp () {
+  local IFS=/ c=1 n d
+    local p=(${1/#$HOME/\~}) r=${p[*]}
+  local s=${#r}
+  while ((s>$2&&c<${#p[*]}-1))
+    do
+      d=${p[c]}
+    n=1;[[ $d = .* ]]&&n=2
+      ((s-=${#d}-n))
+      p[c++]=${d:0:n}
+    done
+      echo "${p[*]}"
+}
+
+main='\[\033[01;34m\]$(
+  _dir_chomp "$(pwd)" 20
+  )\[\033[01;31m\]$(__git_ps1)\[\033[01;34m\]\[\033[00m\]'
+
+export PS1="\[\033[0;33m\][\!] $main\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\` → $reset"; 
 
 # Enable tab completion
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUPSTREAM="auto"
 
 # History
 alias h?="history | grep"
@@ -41,7 +79,8 @@ alias ll='ls -lh'
 alias la='ls -lA'
 alias l='ls'
 
-alias conLab='ssh pabardea@linux.student.cs.uwaterloo.ca'
+alias conLab='ssh cs'
+alias guiLab='ssh -y cs'
 alias vim='mvim'
 
 alias search=grep
@@ -72,6 +111,7 @@ extract () {
 }
 
 alias reload='source ~/.bash_profile'
+alias rld='source ~/.bash_profile'
 
 #moving around
 alias back='cd $OLDPWD'
@@ -87,8 +127,7 @@ alias docs='cd ~/Documents'
 alias desktop='cd ~/Desktop'
 alias downloads='cd ~/Downloads'
 alias dev='cd ~/Developer'
-alias gotoCS="cd ~/Google\ Drive/Waterloo/2A/CS241"
-alias 2a="cd ~/Google\ Drive/Waterloo/2A"
+alias 2b="cd ~/Google\ Drive/Waterloo/2B"
 
 export LSCOLORS=Cxfxexdxbxegedabagacad
 
@@ -105,7 +144,7 @@ alias oldSchool='open ~/Applications/cool-retro-term/cool-retro-term.app'
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 
 # get external ip
-alias extip='curl icanhazip.com'
+alias extIp='curl icanhazip.com'
 
 # print the current time
 alias now='date +%T'
@@ -114,3 +153,6 @@ alias now='date +%T'
 alias git='hub'
 alias 'git-ammend'='git commit --ammend -C HEAD'
 alias 'git-undo'='git reset --soft HEAD^'
+
+# play framework.
+alias play='activator'

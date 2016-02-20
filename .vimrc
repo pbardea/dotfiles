@@ -1,38 +1,28 @@
-"Vundle stuff
-" Of course
-set nocompatible
-
-" Required Vundle setup
-filetype off
-set runtimepath+=~/.vim/bundle/vundle
-call vundle#rc()
-
-Plugin 'gmarik/vundle'
-
-
-set ignorecase
-set ruler
-set smartcase
-set number
-set shellslash
-set nocompatible
-set hidden
-set history=1000
-set guioptions-=T
+" -------------------------
+" Set prefrences
+" -------------------------
+set ignorecase " ignore case when searching
+set smartcase  " when both ignorecase and smartcase are on,
+               " if the patter contains an upperase letter it is case insensitive, otherwise it is not
+set ruler      " show position of cursor in bottom right corner
+set number     " show line numbers
+set shellslash " forward slash is used when expanding names
+set nocompatible " Stay away from the old vi
+set hidden     " opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
+set history=1000 " set history to 1000 instructions
+set guioptions-=T 
 set guioptions-=m
-set title
-set scrolloff=3
-set hlsearch
-set incsearch
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp    
-set noerrorbells
-" set wrap linebreak nolist
-" set columns=86
+set title       " set shell title to filename
+set scrolloff=3 " set scrolloffset to 3 lines
+set hlsearch    " highlight search
+set incsearch   " search as you type
+" set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp    
+set noerrorbells " turn off error bells
+set wrap linebreak nolist " break at lines
 
-
-set expandtab
-set tabstop=2
+set expandtab " insert spaces when tab is pressed
+set tabstop=2 "
 set softtabstop=2
 set shiftwidth=2
 set autoindent
@@ -41,31 +31,37 @@ set smarttab
 set backspace=indent,eol,start
 set wildmenu
 set t_Co=256
-
-noremap j gj
-noremap k gk
-
-noremap gj j
-noremap gk k
-
-call pathogen#infect()
-call pathogen#helptags()
+set shell=bash "fish
 
 
-"let mapleader = ","
-nmap <leader>q :bd<cr>
-nmap <leader>w <c-w><c-w>
-nmap <silent> <leader>df gf<leader>diff<cr>
+"Lagging Caps->esc hack
 :command -bang Q q<bang>
 :command -bang Wq wq<bang>
 :command -bang WQ wq<bang>
 :command -bang W w<bang>
 
-" "set nobackup
-" nmap <C-j> :bn<cr>
-" "set noswapfile
-" nmap <C-k> :bp<cr>
+" -------------------------
+" Leader mappings
+" -------------------------
+imap <Leader>v  <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR>
+nmap <leader>todo :e ~/.vimwiki/TODO.wiki<cr>
+set clipboard=unnamed
 
+nmap <leader>delnum :%s/\v^[0-9]+\s+//gc<cr>
+" save and run python script
+nmap <leader>run :w<CR>:exe ":!python " . getreg("%") . "" <CR>
+
+nmap <leader>be :BufExplorer<cr>
+let mapleader = "\\"
+:map <Leader>diff :VCSVimDiff<cr>
+nnoremap <leader>a :echo("\<leader\> works! It is set to <leader>")<CR>
+nnoremap <leader>w <C-w>w
+nnoremap <leader>s :!subl %<CR><CR>
+nnoremap <leader>c :CtrlPClearCache<CR>
+nnoremap <leader>x :!
+nmap <leader>q :bd<cr>
+nmap <leader>w <c-w><c-w>
+nmap <silent> <leader>df gf<leader>diff<cr>
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>cl :noh<cr>
 nnoremap / /\v
@@ -113,105 +109,91 @@ inoremap jk <esc>
 "nmap S"     va"S
 "nmap S`     va`S
 
+" Navigation
+noremap j gj
+noremap k gk
 
-set csqf=s-,g-,d-,c-,t-,e-,f-,i-
-cs add cscope.out
+noremap gj j
+noremap gk k
 
+vmap gy "+y
+map  gp "+p
+map  gP "+P
+
+noremap Y y$
+ 
+" -------------------------
+" Vundle
+" -------------------------
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+ 
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
+" Syntax Highlighting
+Plugin 'groenewege/vim-less'
+Plugin 'wilsaj/chuck.vim'
+Plugin 'dag/vim-fish'
+Plugin 'skammer/vim-css-color'
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+call vundle#end()
+ 
+"change leader key from '/' to ','
+ 
+set nocompatible
+set ruler
+set cursorline
+ 
+execute pathogen#infect()
 syntax on
+filetype off
 filetype plugin indent on
+ 
+set encoding=utf-8 "UNICODE GLYPHS
+set nobackup
 
-set listchars=tab:>-,trail:·,eol:$
-"nmap <silent> <leader>s :set nolist!<CR>
-"
-"
+nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>nf :NERDTreeFind<cr>
+
+nnoremap <leader>v <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR>
+ 
+"get rid of old habits~
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+ 
+
+noremap j gj
+noremap k gk
+
+noremap gj j
+noremap gk k
+
+noremap Y y$
 
 set background=dark
 let g:solarized_terutrans=1
 let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
-"colorscheme solarized
-
-" colorscheme hybrid
-" colorscheme molokai2
-" colorscheme jellybeans
-" colorscheme badwolf
 colorscheme gruvbox
-runtime macros/matchit.vim
-
-:map <Leader>diff :VCSVimDiff<cr>
-
-" Comments
-" Perl, Python, Ruby, shell scripts
-" autocmd BufNewFile,BufRead *.rb,*.py,*.pl,*.sh vmap u :-1/^#/s///<CR>
-" autocmd BufNewFile,BufRead *.rb,*.py,*.pl,*.sh vmap c :-1/^/s//#/<CR>
-" C, C++
-" autocmd BufNewFile,BufRead *.h,*.c,*.cpp vmap u :-1/^\/\//s///<CR>
-" autocmd BufNewFile,BufRead *.h,*.c,*.cpp vmap s :-1/^/s//\/\//<CR>
-au FileType c,cpp,h setlocal comments-=:// comments+=f://
-
-nmap <F3> :cp<enter>
-nmap <F4> :cn<enter>
-nmap <F5> :cfile build_log<cr>:copen<cr>/error<cr>
-nmap <F6> :cp<enter>
-nmap <F7> :cn<enter>
-nmap <F8> :cfile build_log<cr>:copen<cr>/error<cr>
-nmap <leader>l :view cscope.files<cr>/
-vmap gy "+y
-map  gp "+p
-map  gP "+P
-
-runtime macros/gdb_mappings.vim
-
-" Fold at previous search pattern
-" User zr to display more, zm to display less
-nnoremap \z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
-
-"let vimclojure#NailgunClient = "/home/pbardea/bin/ng"
-let clj_highlight_builtins = 1
-let clj_highlight_contrib = 1
-let clj_paren_rainbow = 1
-let clj_want_gorilla = 1
-
-let g:gccsenseUseOmniFunc = 1
-
-function! TabMessage(cmd)
-  redir => message
-  silent execute a:cmd
-  redir END
-  tabnew
-  silent put=message
-  set nomodified
-endfunction
-command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
-
-let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-nnoremap <leader>nt :NERDTreeToggle<cr>
-nnoremap <leader>nf :NERDTreeFind<cr>
-
-imap <Leader>v  <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR>
-nmap <leader>todo :e ~/vimwiki/TODO.wiki<cr>
-set clipboard=unnamed
-
-nmap <leader>delnum :%s/\v^[0-9]+\s+//gc<cr>
-nmap <leader>run :w<CR>:exe ":!python " . getreg("%") . "" <CR>
-" nmap <C-i> :tabp<cr>
-" nmap <C-o> :tabn<cr>
-nmap :tb :tabe
-
-nmap <leader>be :BufExplorer<cr>
-
-" Show whitespace(/invisibles)
-" set list listchars=tab:\ \ ,trail:·
-
-" Show PASTE if in paste mode
-let g:airline_detect_paste=1
-
-" ----- airblade/vim-gitgutter settings -----
-" Required after having changed the colorscheme
-hi clear SignColumn
-" In vim-airline, only display "hunks" if the diff is non-zero
-let g:airline#extensions#hunks#non_zero_only = 1
 
 set statusline=%f    " Path.
 set statusline+=%m   " Modified flag.
@@ -221,21 +203,6 @@ set statusline+=%w   " Preview window flag.
 set statusline+=\    " Space.
 
 set statusline+=%#redbar#                " Highlight the following as a warning.
-" set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
-" set statusline+=%*                           " Reset highlighting.
-" 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" 
-" let g:syntastic_error_symbol = '✘'
-" let g:syntastic_warning_symbol = "▲"
-" augroup mySyntastic
-"   au!
-"   au FileType tex let b:syntastic_mode = "passive"
-" augroup END
-
 set statusline+=%=   " Right align.
 
 " File format, encoding and type.  Ex: "(unix/utf-8/python)"
@@ -243,7 +210,6 @@ set statusline+=(
 set statusline+=%{&ft}                        " Type (python).
 set statusline+=)
 
-" Line and column position and counts.
 set statusline+=\ (L%l\/%L,\ C%03c)
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 
@@ -251,6 +217,17 @@ set laststatus=2
 nnoremap <leader>s :set spell!<Cr>
 nnoremap <leader>f 1z=
 
+
+
+set t_Co=256
+set rnu
+autocmd BufNewFile,BufRead *.grg set syntax=george
+autocmd BufNewFile,BufRead *.fish set syntax=fish
+let g:ctrlp_working_path_mode = 'ra'
+
+" ################################
+" RAINBOW PARENTHESES
+" ################################
 let g:rbpt_colorpairs = [
         \ ['blue',       '#FF6000'],
         \ ['cyan', '#00FFFF'],
@@ -283,17 +260,12 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-"SNIPS
-" Track the engine.
-Plugin 'SirVer/ultisnips'
+" ################################
+" END RAINBOW PARENTHESES
+" ################################
+filetype plugin indent off
 
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-
-" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" 
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
+"GO LANG SUPPORT
+set rtp+=$GOROOT/misc/vim
+filetype plugin indent on
+syntax on

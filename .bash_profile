@@ -168,6 +168,7 @@ alias now='date +%T'
 # git/github
 # requires `brew install hub`
 alias git='hub'
+# move these to .gitconfig
 alias 'git-ammend'='git commit --ammend -C HEAD'
 alias 'git-undo'='git reset --soft HEAD^'
 

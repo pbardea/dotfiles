@@ -95,7 +95,8 @@ alias l='ls'
 
 alias conLab='ssh cs'
 alias guiLab='ssh -y cs'
-alias vim='mvim'
+# Note: need macvim. Otherwise you will cry.
+alias vim='mvim' 
 
 alias search=grep
 

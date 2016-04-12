@@ -22,20 +22,24 @@ set noerrorbells " turn off error bells
 set wrap linebreak nolist " break at lines
 
 set expandtab " insert spaces when tab is pressed
-set tabstop=2 "
-set softtabstop=2
-set shiftwidth=2
-set autoindent
-set smartindent
-set smarttab
-set backspace=indent,eol,start
-set wildmenu
-set t_Co=256
-set shell=bash "fish
+set tabstop=2 " how many columns a tab counts for
+set softtabstop=2 " how many columns vim uses when you hit tab in insert mobe
+set shiftwidth=2 " how many columns text is indented with >>
+set autoindent " copy the indentation from the previous line when starting a new one
+set smartindent " automatically inserts one extra level of indentation in some cases
+set smarttab " affects how tab key presses are interpreted depending on position of cursor
+set backspace=indent,eol,start " makes backspace work like other editors, don't delete over line breaks or automatically inserted indentattion
+set wildmenu  " command line completion
+set t_Co=256 " colours
+set shell=bash "maybe change some fish somtimes
+
+let NERDTreeHijackNetrw=1 " NerdTreeTakeOverNetrw
 
 
-"Lagging Caps->esc hack
-:command -bang Q q<bang>
+" Lagging Caps->esc hack
+" Since I mapped caps to escape, sometimes there is lag, so I may accidentally
+" type capitals
+:command -bang Q q<bang> 
 :command -bang Wq wq<bang>
 :command -bang WQ wq<bang>
 :command -bang W w<bang>
@@ -43,85 +47,62 @@ set shell=bash "fish
 " -------------------------
 " Leader mappings
 " -------------------------
-imap <Leader>v  <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR>
+" Toggle paste formatting
+imap <Leader>v  <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR> 
+" open todo page
 nmap <leader>todo :e ~/.vimwiki/TODO.wiki<cr>
+" set the default clipboard
 set clipboard=unnamed
 
+" magic regex. to investigate
 nmap <leader>delnum :%s/\v^[0-9]+\s+//gc<cr>
 " save and run python script
-nmap <leader>run :w<CR>:exe ":!python " . getreg("%") . "" <CR>
+nmap <leader>py :w<CR>:exe ":!python " . getreg("%") . "" <CR>
 
-nmap <leader>be :BufExplorer<cr>
+" save and run ruby script
+nmap <leader>rb :w<CR>:exe ":!ruby " . getreg("%") . "" <CR>
+
+" save and run swift script
+nmap <leader>sw :w<CR>:exe ":!swift " . getreg("%") . "" <CR>
+
+" explore the buffers
+nmap <leader>be :BufExplorer<cr> 
+" map leader to backslash
 let mapleader = "\\"
+" Uses vimdiff to compare a file with it unmodified version
 :map <Leader>diff :VCSVimDiff<cr>
-nnoremap <leader>a :echo("\<leader\> works! It is set to <leader>")<CR>
-nnoremap <leader>w <C-w>w
-nnoremap <leader>s :!subl %<CR><CR>
+
+" clear ctrl-p
 nnoremap <leader>c :CtrlPClearCache<CR>
-nnoremap <leader>x :!
+" run some bash
+nnoremap <leader>x :! 
+" delete buffer
 nmap <leader>q :bd<cr>
-nmap <leader>w <c-w><c-w>
+" not sure what this does
 nmap <silent> <leader>df gf<leader>diff<cr>
+" clear highlighting
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>cl :noh<cr>
+
+" magic
 nnoremap / /\v
 vnoremap / /\v
 nnoremap <tab> %
 vnoremap <tab> %
 
+" VimwikiAll2HTML 
 nmap <leader>wh VimwikiAll2HTML<cr>
-inoremap jk <esc>
 
-"For surround
-"nmap s      <Nop>
-"jnmap sw     viwS
-"nmap sW     viWS
-"nmap ss     visS
-"nmap sp     vipS
-"nmap s[     vi[S
-"nmap s]     vi]S
-"nmap s(     vi(S
-"nmap s)     vi)S
-"nmap s{     vi{S
-"nmap s}     vi}S
-"nmap s<     vi<S
-"nmap s>     vi>S
-"nmap st     vitS
-"nmap s'     vi'S
-"nmap s"     vi"S
-"nmap s`     vi`S
-"
-"nmap S      <Nop>
-"nmap Sw     vawS
-"nmap SW     vaWS
-"nmap Ss     vasS
-"nmap Sp     vapS
-"nmap S[     va[S
-"nmap S]     va]S
-"nmap S(     va(S
-"nmap S)     va)S
-"nmap S{     va{S
-"nmap S}     va}S
-"nmap S<     va<S
-"nmap S>     va>S
-"nmap St     vatS
-"nmap S'     va'S
-"nmap S"     va"S
-"nmap S`     va`S
-
-" Navigation
+" Navigation by visual line
 noremap j gj
 noremap k gk
 
 noremap gj j
 noremap gk k
 
-vmap gy "+y
-map  gp "+p
-map  gP "+P
-
+" copy until end of line
 noremap Y y$
- 
+
 " -------------------------
 " Vundle
 " -------------------------
@@ -139,7 +120,6 @@ Plugin 'tpope/vim-surround'
 " Syntax Highlighting
 Plugin 'groenewege/vim-less'
 Plugin 'wilsaj/chuck.vim'
-Plugin 'dag/vim-fish'
 Plugin 'skammer/vim-css-color'
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -156,8 +136,11 @@ call vundle#end()
  
 "change leader key from '/' to ','
  
+" not compatible w/ old VI
 set nocompatible
+" info in bottom left about where you are on the page
 set ruler
+" highlight current line
 set cursorline
  
 execute pathogen#infect()
@@ -166,35 +149,27 @@ filetype off
 filetype plugin indent on
  
 set encoding=utf-8 "UNICODE GLYPHS
+" yolo. no backup for me
 set nobackup
 
+" toggle nerdtoggle
 nnoremap <leader>nt :NERDTreeToggle<cr>
+" find nerdfind
 nnoremap <leader>nf :NERDTreeFind<cr>
 
-nnoremap <leader>v <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR>
  
 "get rid of old habits~
+" don't allow arrow keys
 noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
 noremap <right> <nop>
  
-
-noremap j gj
-noremap k gk
-
-noremap gj j
-noremap gk k
-
-noremap Y y$
-
+" set background
 set background=dark
-let g:solarized_terutrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
 colorscheme gruvbox
 
+" set up status line
 set statusline=%f    " Path.
 set statusline+=%m   " Modified flag.
 set statusline+=%r   " Readonly flag.
@@ -217,10 +192,10 @@ set laststatus=2
 nnoremap <leader>s :set spell!<Cr>
 nnoremap <leader>f 1z=
 
-
-
-set t_Co=256
+" set relative line numbers
 set rnu
+
+" add syntax highlighting for george and fish
 autocmd BufNewFile,BufRead *.grg set syntax=george
 autocmd BufNewFile,BufRead *.fish set syntax=fish
 let g:ctrlp_working_path_mode = 'ra'

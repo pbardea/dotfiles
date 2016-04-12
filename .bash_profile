@@ -8,6 +8,14 @@
 export EDITOR=$(which mvim)
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
+export MYSQL_HOME=/usr/local/mysql
+alias start_mysql='sudo $MYSQL_HOME/bin/mysqld_safe &'
+alias stop_mysql='sudo $MYSQL_HOME/bin/mysqladmin shutdown'
+
+# Go
+export GOPATH=/Users/pbardea/go/
+export PATH=$GOPATH/bin:$PATH
+
 #Set command line editor to be vi
 set -o vi
 
@@ -30,6 +38,11 @@ function joke {
     echo -e "Q:$blue $q$reset\nA:$purple $a$reset"
   fi
 }
+
+
+# Transfer files
+transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
+tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
 
 
 ########## PROMPT ################
@@ -57,7 +70,7 @@ main='\[\033[01;34m\]$(
   _dir_chomp "$(pwd)" 20
   )\[\033[01;31m\]$(__git_ps1)\[\033[01;34m\]\[\033[00m\]'
 
-export PS1="\[\033[0;33m\][\!] $main\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\` → $reset"; 
+export PS1="$main\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\` → $reset"; 
 
 # Enable tab completion
 source ~/.git-completion.bash
@@ -69,6 +82,7 @@ export GIT_PS1_SHOWUPSTREAM="auto"
 
 # History
 alias h?="history | grep"
+alias lsr="find . -name"
 export HISTSIZE=10000
 shopt -s histappend
 
@@ -87,6 +101,7 @@ alias search=grep
 
 # Rails
 alias rake='bundle exec rake'
+alias rspec='bundle exec rspec'
 
 # Easy extract
 extract () {
@@ -129,6 +144,7 @@ alias downloads='cd ~/Downloads'
 alias dev='cd ~/Developer'
 alias 2b="cd ~/Google\ Drive/Waterloo/2B"
 
+export CLICOLOR=1
 export LSCOLORS=Cxfxexdxbxegedabagacad
 
 #jekyll stuff
@@ -156,3 +172,6 @@ alias 'git-undo'='git reset --soft HEAD^'
 
 # play framework.
 alias play='activator'
+export SWIFTENV_ROOT="$HOME/.swiftenv"
+export PATH="$SWIFTENV_ROOT/bin:$PATH"
+eval "$(swiftenv init -)"

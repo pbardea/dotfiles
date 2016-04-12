@@ -1,5 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/pbardea/RoR/MessengerApp/db/migrate'
 let g:netrw_dirhist_2='/Users/pbardea/RoR/MessengerApp/app/views/messages'
 let g:netrw_dirhist_3='/Users/pbardea/enflick/textnow-ios5/application/TextNow/Bamboo'
+let g:netrw_dirhist_4='/Users/pbardea/Scavenger/config'
+let g:netrw_dirhist_5='/Users/pbardea/Developer/learnathon/mobile/ios'
+let g:netrw_dirhist_6='/usr/local/lib/ruby/gems/2.2.0/gems/jekyll-3.0.1/lib/jekyll'
+let g:netrw_dirhist_7='/Users/pbardea/Developer/learnathon-mobile-backend/app/models'
+let g:netrw_dirhist_8='/Users/pbardea/Developer/textnow-ios5/application/TextNow/Bamboo'

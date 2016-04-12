@@ -166,6 +166,7 @@ alias extIp='curl icanhazip.com'
 alias now='date +%T'
 
 # git/github
+# requires `brew install hub`
 alias git='hub'
 alias 'git-ammend'='git commit --ammend -C HEAD'
 alias 'git-undo'='git reset --soft HEAD^'

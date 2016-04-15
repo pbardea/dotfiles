@@ -5,6 +5,7 @@
   autocrl = true
 	editor = /usr/bin/vim
 	excludesfile = /Users/pbardea/.gitignore_global
+	autocrlf = input
 [push]
 	default = upstream
 [alias]
@@ -13,20 +14,25 @@
 	switch = !legit switch \"$@\"
 	branches = !legit branches
 	sprout = !legit sprout \"$@\"
+	sp = !legit sprout \"$@\"
 	unpublish = !legit unpublish \"$@\"
 	harvest = !legit harvest \"$@\"
 	sync = !legit sync \"$@\"
 	publish = !legit publish \"$@\"
 	graft = !legit graft \"$@\"
+  findconf = diff --name-only --diff-filter=U
+  showconf = diff --diff-filter=U
   st = status -sb
   co = checkout
   br = branch
   up = rebase
   ci = commit
+  ammend = commit --ammend -C HEAD
+  undo = reset --soft HEAD^
 [credential]
 	helper = osxkeychain
 [color]
-	ui = 1
+	ui = auto
 [merg]
 	conflictstyle = diff3
 [filter "lfs"]
@@ -43,3 +49,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[pull]
+	rebase = true

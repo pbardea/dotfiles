@@ -95,14 +95,14 @@ alias l='ls'
 
 alias conLab='ssh cs'
 alias guiLab='ssh -y cs'
-# Note: need macvim. Otherwise you will cry.
-alias vim='mvim' 
+alias vim='mvim'
 
 alias search=grep
 
 # Rails
 alias rake='bundle exec rake'
 alias rspec='bundle exec rspec'
+alias test='bundle exec rspec'
 
 # Easy extract
 extract () {
@@ -167,11 +167,7 @@ alias extIp='curl icanhazip.com'
 alias now='date +%T'
 
 # git/github
-# requires `brew install hub`
 alias git='hub'
-# move these to .gitconfig
-alias 'git-ammend'='git commit --ammend -C HEAD'
-alias 'git-undo'='git reset --soft HEAD^'
 
 # play framework.
 alias play='activator'

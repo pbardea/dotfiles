@@ -7,7 +7,10 @@
 =================
 
 Store my preferences for terminal including:
-  .vimrc
-  .vim
-  .bash_profile
-  .bashrc
+-  .vimrc
+-  .vim
+-  .bash_profile
+-  .bashrc
+-  .gitcompletion
+-  .gitconfig
+-  inputrc

@@ -27,6 +27,7 @@
   br = branch
   up = rebase
   ci = commit
+  pranked = reset --hard HEAD # credit to github.com/jfeng41
   ammend = commit --ammend -C HEAD
   undo = reset --soft HEAD^
 [credential]

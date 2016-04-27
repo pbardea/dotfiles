@@ -168,7 +168,7 @@ alias now='date +%T'
 
 # git/github
 alias git='hub'
-alias 'rebase proceed'='git add --all && git rebase --continue'
+alias 'cont-rebase'='git add --all && git rebase --continue'
 
 # play framework.
 alias play='activator'

@@ -22,9 +22,9 @@ set noerrorbells " turn off error bells
 set wrap linebreak nolist " break at lines
 
 set expandtab " insert spaces when tab is pressed
-set tabstop=2 " how many columns a tab counts for
-set softtabstop=2 " how many columns vim uses when you hit tab in insert mobe
-set shiftwidth=2 " how many columns text is indented with >>
+set tabstop=4 " how many columns a tab counts for
+set softtabstop=4 " how many columns vim uses when you hit tab in insert mobe
+set shiftwidth=4 " how many columns text is indented with >>
 set autoindent " copy the indentation from the previous line when starting a new one
 set smartindent " automatically inserts one extra level of indentation in some cases
 set smarttab " affects how tab key presses are interpreted depending on position of cursor
@@ -239,6 +239,10 @@ au Syntax * RainbowParenthesesLoadBraces
 " END RAINBOW PARENTHESES
 " ################################
 filetype plugin indent off
+
+" Syntastic
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 "GO LANG SUPPORT
 set rtp+=$GOROOT/misc/vim

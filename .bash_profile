@@ -77,7 +77,6 @@ export PS1="$main\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\
 
 # Enable tab completion
 source ~/.git-completion.bash
-source ~/.git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWSTASHSTATE=1

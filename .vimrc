@@ -114,7 +114,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 " Syntax Highlighting
@@ -200,44 +199,6 @@ autocmd BufNewFile,BufRead *.grg set syntax=george
 autocmd BufNewFile,BufRead *.fish set syntax=fish
 let g:ctrlp_working_path_mode = 'ra'
 
-" ################################
-" RAINBOW PARENTHESES
-" ################################
-let g:rbpt_colorpairs = [
-        \ ['blue',       '#FF6000'],
-        \ ['cyan', '#00FFFF'],
-        \ ['darkmagenta',    '#CC00FF'],
-        \ ['yellow',   '#FFFF00'],
-        \ ['red',     '#FF0000'],
-        \ ['darkgreen',    '#00FF00'],
-        \ ['White',         '#c0c0c0'],
-        \ ['blue',       '#FF6000'],
-        \ ['cyan', '#00FFFF'],
-        \ ['darkmagenta',    '#CC00FF'],
-        \ ['yellow',   '#FFFF00'],
-        \ ['red',     '#FF0000'],
-        \ ['darkgreen',    '#00FF00'],
-        \ ['White',         '#c0c0c0'],
-        \ ['blue',       '#FF6000'],
-        \ ['cyan', '#00FFFF'],
-        \ ['darkmagenta',    '#CC00FF'],
-        \ ['yellow',   '#FFFF00'],
-        \ ['red',     '#FF0000'],
-        \ ['darkgreen',    '#00FF00'],
-        \ ['White',         '#c0c0c0'],
-        \ ]
-let g:rbpt_max = 21
-let g:rbpt_loadcmd_toggle = 0
-
-nnoremap <leader>tp :RainbowParenthesesToggle<Cr>
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-" ################################
-" END RAINBOW PARENTHESES
-" ################################
 filetype plugin indent off
 
 " Syntastic

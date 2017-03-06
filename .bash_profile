@@ -7,10 +7,6 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PKG_CONFIG_PATH=/usr/local/Cellar/cairo/1.12.16/lib/pkgconfig/
 export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
 
-# Set default editor to vim (the instance found in MacVim)
-export EDITOR=$(which mvim)
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-
 export MYSQL_HOME=/usr/local/mysql
 alias start_mysql='sudo $MYSQL_HOME/bin/mysqld_safe &'
 alias stop_mysql='sudo $MYSQL_HOME/bin/mysqladmin shutdown'
@@ -97,8 +93,6 @@ alias l='ls'
 
 alias conLab='ssh cs'
 alias guiLab='ssh -y cs'
-alias vim='mvim'
-alias vi='mvim -v'
 
 alias search=grep
 
@@ -169,20 +163,6 @@ alias extIp='curl icanhazip.com'
 # print the current time
 alias now='date +%T'
 
-# git/github
-alias git='hub'
-
-# play framework.
-alias play='activator'
-export SWIFTENV_ROOT="$HOME/.swiftenv"
-export PATH="$SWIFTENV_ROOT/bin:$PATH"
-eval "$(swiftenv init -)"
-
 #networking stuffs
 alias scan='arp -an'
 
-function _update_ps1() {
-    PS1="$(~/bin/powerline-shell.py $? 2> /dev/null)"
-}
-
-PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"

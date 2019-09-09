@@ -1,25 +1,13 @@
-# Set up path
-export PATH=/usr/local/bin:$PATH
-export ANDROID_HOME=~/Library/Android/sdk/
-export PATH=$ANDROID_HOME/tools:$PATH
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-
-export PKG_CONFIG_PATH=/usr/local/Cellar/cairo/1.12.16/lib/pkgconfig/
-export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
-
-# Set default editor to vim (the instance found in MacVim)
-export EDITOR=$(which mvim)
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-
-export MYSQL_HOME=/usr/local/mysql
-alias start_mysql='sudo $MYSQL_HOME/bin/mysqld_safe &'
-alias stop_mysql='sudo $MYSQL_HOME/bin/mysqladmin shutdown'
+# Start flame war
+alias vim=nvim
+alias vi=nvim
+export EDITOR=$(which nvim)
 
 # Go
-export GOPATH=/Users/pbardea/go/
+export GOPATH=~/Developer/go
 export PATH=$GOPATH/bin:$PATH
 
-#Set command line editor to be vi
+# Set command line vi mode
 set -o vi
 
 ########## COLOURS ################
@@ -30,6 +18,8 @@ purple="\033[0;35m"
 yellow="\033[0;33m"
 reset="\033[0m"
 
+export CLICOLOR=1
+export LSCOLORS=Cxfxexdxbxegedabagacad
 
 # jokes
 function joke {
@@ -42,38 +32,19 @@ function joke {
   fi
 }
 
-
 # Transfer files
 transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
 tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
 
-
-########## PROMPT ################
-# '\u' adds the name of the current user to the prompt
-# '\$(__git_ps1)' adds git-related stuff
-# '\W' adds the name of the current directory
-#
-# export PS1="$red\w$green\$(__git_ps1)$reset % "
-#
-_dir_chomp () {
-  local IFS=/ c=1 n d
-    local p=(${1/#$HOME/\~}) r=${p[*]}
-  local s=${#r}
-  while ((s>$2&&c<${#p[*]}-1))
-    do
-      d=${p[c]}
-    n=1;[[ $d = .* ]]&&n=2
-      ((s-=${#d}-n))
-      p[c++]=${d:0:n}
-    done
-      echo "${p[*]}"
+# Prompt
+POWERLINE_CONFIG='~/.config/powerline-shell/config.json'
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
 }
 
-main='\[\033[01;34m\]$(
-  _dir_chomp "$(pwd)" 20
-  )\[\033[01;31m\]$(__git_ps1)\[\033[01;34m\]\[\033[00m\]'
-
-export PS1="$main\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\` → $reset"; 
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
 
 # Enable tab completion
 source ~/.git-completion.bash
@@ -88,24 +59,30 @@ alias lsr="find . -name"
 export HISTSIZE=10000
 shopt -s histappend
 
-alias webstart='python -m SimpleHTTPServer'
-# ls aliases
+# Aliases
+alias reload='source ~/.bash_profile'
+alias git=hub
+
+# Moving around 
 alias ls='ls'
 alias ll='ls -lh'
 alias la='ls -lA'
 alias l='ls'
+alias back='cd $OLDPWD'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias home='cd ~/'
+alias docs='cd ~/Documents'
+alias desktop='cd ~/Desktop'
+alias downloads='cd ~/Downloads'
+alias dev='cd ~/Developer'
+alias c='cd /Users/pbardea/Developer/Go/src/github.com/cockroachdb/cockroach'
 
 alias conLab='ssh cs'
 alias guiLab='ssh -y cs'
-alias vim='mvim'
-alias vi='mvim -v'
-
-alias search=grep
-
-# Rails
-alias rake='bundle exec rake'
-alias rspec='bundle exec rspec'
-alias test='bundle exec rspec'
 
 # Easy extract
 extract () {
@@ -129,60 +106,36 @@ extract () {
   fi
 }
 
-alias reload='source ~/.bash_profile'
-alias rld='source ~/.bash_profile'
-
-#moving around
-alias back='cd $OLDPWD'
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-
-## Dir shortcuts
-alias home='cd ~/'
-alias docs='cd ~/Documents'
-alias desktop='cd ~/Desktop'
-alias downloads='cd ~/Downloads'
-alias dev='cd ~/Developer'
-alias 3a="cd ~/Google\ Drive/Waterloo/3A"
-
-export CLICOLOR=1
-export LSCOLORS=Cxfxexdxbxegedabagacad
-
-#jekyll stuff
+# Jekyll
 alias jserve="jekyll serve"
 alias jwatch="jekyll serve --watch"
 alias jbuild="jekyll build"
 
-#fun stuff
+# Fun
 alias hack='cmatrix'
-alias oldSchool='open ~/Applications/cool-retro-term/cool-retro-term.app'
-
-# get internet speed
+alias retro='open ~/Applications/cool-retro-term/cool-retro-term.app'
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
-
-# get external ip
 alias extIp='curl icanhazip.com'
-
-# print the current time
 alias now='date +%T'
-
-# git/github
-alias git='hub'
-
-# play framework.
-alias play='activator'
-export SWIFTENV_ROOT="$HOME/.swiftenv"
-export PATH="$SWIFTENV_ROOT/bin:$PATH"
-eval "$(swiftenv init -)"
-
-#networking stuffs
 alias scan='arp -an'
+alias wtf='wtfutil'
 
-function _update_ps1() {
-    PS1="$(~/bin/powerline-shell.py $? 2> /dev/null)"
-}
+# Ruby
+eval "$(rbenv init -)"
 
-PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+# opam configuration
+test -r /Users/pbardea/.opam/opam-init/init.sh && . /Users/pbardea/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/pbardea/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/pbardea/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/pbardea/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/pbardea/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+# Cockroach
+export CLUSTER="paul-test"
+export PATH=$GOPATH/src/github.com/cockroachdb/cockroach/bin:$PATH

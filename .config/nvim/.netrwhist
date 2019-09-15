@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/pbardea/.vim/plugged'
+let g:netrw_dirhist_2='/Users/pbardea/calder/src/armature'
+let g:netrw_dirhist_3='/Users/pbardea/calder/src'
+let g:netrw_dirhist_4='/Users/pbardea/calder/src/renderer/commands'
+let g:netrw_dirhist_5='/Users/pbardea/calder/src/import_dir'
